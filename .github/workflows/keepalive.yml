@@ -1,0 +1,19 @@
+# Free-tier Supabase projects pause after 7 days without requests.
+# This job makes one lightweight request every 3 days to keep the database awake.
+name: Keep Supabase awake
+
+on:
+  schedule:
+    - cron: '0 9 */3 * *'
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          curl --fail --silent --show-error -X POST \
+            "${{ vars.SUPABASE_URL }}/rest/v1/rpc/site_info" \
+            -H "apikey: ${{ vars.SUPABASE_ANON_KEY }}" \
+            -H "Content-Type: application/json" \
+            -d '{}'
