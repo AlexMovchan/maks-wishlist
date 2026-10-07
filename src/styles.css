@@ -191,27 +191,17 @@ code {
 }
 
 .header__brand {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  min-width: 0;
-  color: var(--text);
-  font-weight: 800;
-  font-size: 18px;
+  flex-shrink: 0;
+  font-size: 26px;
+  line-height: 1;
   text-decoration: none;
-}
-
-.header__brand span {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 .header__nav {
   display: flex;
   align-items: center;
   gap: 8px;
-  flex-shrink: 0;
+  min-width: 0;
 }
 
 .header__user {
@@ -263,7 +253,7 @@ code {
   margin: 14px auto 0;
   max-width: 520px;
   color: var(--muted);
-  font-size: 15px;
+  font-size: 13px;
 }
 
 .notice {
@@ -769,7 +759,11 @@ textarea:focus {
   }
 
   .header__user {
-    display: none;
+    max-width: 110px;
+  }
+
+  .hero h1 {
+    font-size: 24px;
   }
 
   .admin-list__item {

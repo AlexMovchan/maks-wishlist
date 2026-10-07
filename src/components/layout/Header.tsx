@@ -11,8 +11,9 @@ type Props = {
 export const Header = ({ title, me, adminView, onLogin, onLogout }: Props) => (
   <header className="header">
     <div className="header__inner">
-      <a className="header__brand" href="#">
-        🎁 <span>{title}</span>
+      {/* Icon only: the full title is already the page's main heading */}
+      <a className="header__brand" href="#" aria-label={title} title={title}>
+        🎁
       </a>
       <nav className="header__nav">
         {me?.is_admin && <AdminToggle adminView={adminView} />}
