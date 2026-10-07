@@ -4,6 +4,7 @@ import { AdminPanel } from './components/admin/AdminPanel';
 import { AuthDialog } from './components/auth/AuthDialog';
 import { Header } from './components/layout/Header';
 import { NotConfigured } from './components/layout/NotConfigured';
+import { Snowdrift, Snowfall } from './components/layout/WinterDecor';
 import { Toast } from './components/ui/Toast';
 import { WishlistView } from './components/wishlist/WishlistView';
 import { useHashView } from './hooks/useHashView';
@@ -37,6 +38,7 @@ export const App = () => {
 
   return (
     <>
+      <Snowfall />
       <Header
         title={site?.title ?? 'Вішліст'}
         me={me}
@@ -60,6 +62,7 @@ export const App = () => {
           />
         )}
       </main>
+      <Snowdrift />
 
       {authOpen && <AuthDialog onClose={() => setAuthOpen(false)} onDone={handleAuthDone} />}
       <Toast toast={toast} onClose={dismiss} />

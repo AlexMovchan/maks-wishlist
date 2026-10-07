@@ -22,6 +22,7 @@ export const GiftCard = ({ gift, isAdmin, busy, onReserve, onUnreserve }: Props)
 
   return (
     <article className={`card card--${status}`}>
+      <div className="card__ribbon" aria-hidden="true" />
       <GiftImage image={safeUrl(gift.image_url)} status={status} />
       <GiftDetails gift={gift} showReservedBy={isAdmin} />
       <div className="card__actions">
