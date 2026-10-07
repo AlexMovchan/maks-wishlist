@@ -125,6 +125,16 @@ code {
   color: var(--danger);
 }
 
+.btn--shop {
+  background: var(--surface-2);
+  border-color: var(--surface-2);
+}
+
+.btn--shop:hover {
+  background: var(--border);
+  border-color: var(--border);
+}
+
 .btn--small {
   padding: 6px 14px;
   font-size: 14px;
@@ -382,9 +392,11 @@ code {
   overflow-wrap: anywhere;
 }
 
-.card__link {
-  font-size: 14px;
-  font-weight: 700;
+.card__meta {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .card__who {
@@ -396,6 +408,9 @@ code {
 }
 
 .card__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
   padding: 8px 16px 16px;
 }
 
