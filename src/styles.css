@@ -347,6 +347,7 @@ code {
   border: 3px solid transparent;
   border-radius: var(--radius);
   box-shadow: 0 14px 30px rgb(0 0 0 / 28%);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .card--mine {
@@ -356,7 +357,48 @@ code {
 /* Gift-wrap ribbon along the top edge */
 .card__ribbon {
   height: 8px;
-  background: repeating-linear-gradient(90deg, var(--red) 0 14px, var(--paper) 14px 28px);
+  /* One 28px tile repeated, so shifting it by 28px loops seamlessly */
+  background: linear-gradient(90deg, var(--red) 0 14px, var(--paper) 14px 28px) 0 0 / 28px 100%;
+}
+
+/* Hover: free gifts lift up and their ribbon starts running */
+@media (hover: hover) {
+  .card--free:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 22px 40px rgb(0 0 0 / 40%);
+  }
+
+  .card--free:hover .card__ribbon {
+    animation: ribbon-run 0.6s linear infinite;
+  }
+}
+
+/* Touch screens have no hover: a slight press under the finger instead */
+@media (hover: none) {
+  .card--free:active {
+    transform: scale(0.98);
+  }
+}
+
+@keyframes ribbon-run {
+  to {
+    background-position: 28px 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    transition: none;
+  }
+
+  .card--free:hover,
+  .card--free:active {
+    transform: none;
+  }
+
+  .card--free:hover .card__ribbon {
+    animation: none;
+  }
 }
 
 .card__image {
