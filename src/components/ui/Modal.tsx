@@ -5,8 +5,10 @@ type Props = { title: string; onClose: () => void; children: ReactNode };
 export const Modal = ({ title, onClose, children }: Props) => {
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => e.key === 'Escape' && onClose();
+
     document.addEventListener('keydown', onKey);
     document.body.classList.add('no-scroll');
+
     return () => {
       document.removeEventListener('keydown', onKey);
       document.body.classList.remove('no-scroll');

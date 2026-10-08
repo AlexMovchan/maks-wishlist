@@ -6,6 +6,7 @@ type Flake = { top: number; left: number; size: number; opacity: number; inner: 
 const FLAKES: Flake[] = Array.from({ length: 40 }, (_, i) => {
   const top = 20 + ((i * 53) % 380);
   const left = 2 + ((i * 37) % 96);
+
   return {
     top,
     left,

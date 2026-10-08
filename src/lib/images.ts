@@ -24,15 +24,18 @@ export const compressImage = async (file: File): Promise<CompressedImage> => {
   const bitmap = await decode(file);
   const scale = Math.min(1, MAX_SIDE / Math.max(bitmap.width, bitmap.height));
   const canvas = document.createElement('canvas');
+
   canvas.width = Math.round(bitmap.width * scale);
   canvas.height = Math.round(bitmap.height * scale);
   canvas.getContext('2d')!.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
   bitmap.close();
 
   const webp = await toBlob(canvas, 'image/webp');
+
   if (webp?.type === 'image/webp') return { blob: webp, extension: 'webp' };
 
   const jpeg = await toBlob(canvas, 'image/jpeg');
+
   if (jpeg) return { blob: jpeg, extension: 'jpg' };
 
   throw new AppError('Не вдалося обробити картинку');

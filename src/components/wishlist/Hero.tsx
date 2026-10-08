@@ -1,6 +1,6 @@
-import type { Gift, Me, SiteInfo } from '../../types';
+import type { Gift, Me, SiteContent } from '../../types';
 
-type Props = { site: SiteInfo | null; gifts: Gift[] | null; me: Me | null; onLogin: () => void };
+type Props = { site: SiteContent | null; gifts: Gift[] | null; me: Me | null; onLogin: () => void };
 
 export const Hero = ({ site, gifts, me, onLogin }: Props) => {
   const hasGifts = Boolean(gifts?.length);

@@ -26,7 +26,9 @@ export const GiftsTab = ({ gifts, reload, notify }: Props) => {
 
   const remove = (gift: Gift) => {
     const warning = gift.is_reserved ? `\n\nЙого вже забронював(-ла) ${gift.reserved_by}.` : '';
+
     if (!confirm(`Видалити «${gift.title}»?${warning}`)) return;
+
     perform(async () => {
       await api.admin.deleteGift(gift.id);
       await api.admin.removeImage(gift.image_url);
@@ -35,6 +37,7 @@ export const GiftsTab = ({ gifts, reload, notify }: Props) => {
 
   const unreserve = (gift: Gift) => {
     if (!confirm(`Зняти бронювання «${gift.title}» (${gift.reserved_by})?`)) return;
+
     perform(() => api.unreserve(gift.id), 'Бронювання знято');
   };
 

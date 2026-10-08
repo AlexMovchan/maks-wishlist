@@ -10,7 +10,9 @@ export const useHashView = (): View => {
 
   useEffect(() => {
     const onHashChange = () => setView(readView());
+
     window.addEventListener('hashchange', onHashChange);
+
     return () => window.removeEventListener('hashchange', onHashChange);
   }, []);
 

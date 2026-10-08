@@ -7,8 +7,11 @@ const useObjectUrl = (file: File | null) => {
 
   useEffect(() => {
     if (!file) return setUrl(null);
+
     const objectUrl = URL.createObjectURL(file);
+
     setUrl(objectUrl);
+
     return () => URL.revokeObjectURL(objectUrl);
   }, [file]);
 

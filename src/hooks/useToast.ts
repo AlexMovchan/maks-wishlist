@@ -14,7 +14,9 @@ export const useToast = () => {
 
   useEffect(() => {
     if (!toast) return;
+
     const timer = setTimeout(dismiss, DURATION[toast.kind]);
+
     return () => clearTimeout(timer);
   }, [toast, dismiss]);
 

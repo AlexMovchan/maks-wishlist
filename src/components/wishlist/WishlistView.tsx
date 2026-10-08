@@ -1,10 +1,10 @@
 import type { Notify } from '../../hooks/useToast';
-import type { Gift, Me, SiteInfo } from '../../types';
+import type { Gift, Me, SiteContent } from '../../types';
 import { GiftGrid } from './GiftGrid';
 import { Hero } from './Hero';
 
 type Props = {
-  site: SiteInfo | null;
+  site: SiteContent | null;
   gifts: Gift[] | null;
   me: Me | null;
   error: string;
@@ -25,5 +25,6 @@ const ListStatus = ({ gifts, error }: { gifts: Gift[] | null; error: string }) =
   if (error) return <p className="notice notice--error">{error}</p>;
   if (!gifts) return <p className="muted center">Завантаження…</p>;
   if (gifts.length === 0) return <p className="empty">Список ще порожній. Загляньте пізніше!</p>;
+
   return null;
 };

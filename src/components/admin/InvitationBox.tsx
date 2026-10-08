@@ -2,6 +2,7 @@ import type { Notify } from '../../hooks/useToast';
 
 const buildInvitation = (inviteCode: string) => {
   const siteUrl = location.href.split('#')[0];
+
   return `Привіт! Ось список подарунків: ${siteUrl}\nЩоб забронювати подарунок, зареєструйтеся з кодом: ${inviteCode}`;
 };
 

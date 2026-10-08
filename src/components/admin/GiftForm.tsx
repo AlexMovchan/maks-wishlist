@@ -30,6 +30,7 @@ const validate = (form: FormState, hasFile: boolean): string | null => {
   if (Number.isNaN(parsePrice(form.price))) return 'Ціна має бути числом';
   if (form.url && !safeUrl(form.url)) return 'Посилання має починатися з https://';
   if (form.imageUrl && !hasFile && !isHttpsUrl(form.imageUrl)) return 'Посилання на картинку має починатися з https://';
+
   return null;
 };
 
@@ -63,13 +64,17 @@ export const GiftForm = ({ gift, nextSortOrder, onClose, onSaved }: Props) => {
     }
 
     if (gift?.image_url !== imageUrl) await api.admin.removeImage(gift?.image_url ?? null);
+
     onSaved();
   };
 
   const submit = (e: FormEvent) => {
     e.preventDefault();
+
     const problem = validate(form, Boolean(imageFile));
+
     if (problem) return setError(problem);
+
     run(save);
   };
 

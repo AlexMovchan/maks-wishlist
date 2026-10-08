@@ -23,7 +23,7 @@ export type GiftInput = {
 
 export type Me = { nickname: string; is_admin: boolean };
 
-export type SiteInfo = { title: string; subtitle: string; max_reservations: number };
+export type SiteContent = { title: string; subtitle: string; max_reservations: number };
 
 export type Settings = { title: string; subtitle: string; invite_code: string; max_reservations: number };
 

@@ -24,7 +24,9 @@ export const GuestsTab = ({ reload, notify }: Props) => {
 
   const remove = async (guest: Guest) => {
     const extra = guest.reservations ? ` Його бронювання (${guest.reservations}) теж зникнуть.` : '';
+
     if (!confirm(`Видалити акаунт «${guest.nickname}»?${extra}`)) return;
+
     try {
       await api.admin.deleteGuest(guest.id);
       await Promise.all([load(), reload()]);

@@ -25,8 +25,10 @@ export class AppError extends Error {}
 
 export const toAppError = (error: { message?: string; code?: string }): AppError => {
   const known = (error.code && MESSAGES[error.code]) || (error.message && MESSAGES[error.message]);
+
   if (known) return new AppError(known);
   if (error.code === '23514') return new AppError('Некоректні дані — перевірте поля форми');
+
   return new AppError(`Щось пішло не так: ${error.message ?? 'невідома помилка'}`);
 };
 
