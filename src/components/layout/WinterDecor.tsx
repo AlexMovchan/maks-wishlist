@@ -1,3 +1,6 @@
+import { useState } from 'react';
+import { SNOWMAN_STAGES, Snowman } from '../eggs/Snowman';
+
 type Flake = { top: number; left: number; size: number; opacity: number; inner: boolean };
 
 // Deterministic "random" flakes, kept out of the centre so they don't sit on the title.
@@ -28,4 +31,15 @@ export const Snowfall = () => (
   </div>
 );
 
-export const Snowdrift = () => <div className="snowdrift" aria-hidden="true" />;
+export const Snowdrift = () => {
+  const [stage, setStage] = useState(0);
+  const [waves, setWaves] = useState(0);
+
+  const tap = () => (stage < SNOWMAN_STAGES ? setStage(stage + 1) : setWaves(waves + 1));
+
+  return (
+    <div className="snowdrift" onClick={tap}>
+      <Snowman stage={stage} waves={waves} />
+    </div>
+  );
+};

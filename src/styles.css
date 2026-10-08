@@ -835,6 +835,398 @@ textarea:focus {
   }
 }
 
+/* ---------- Easter eggs ---------- */
+
+/* Star: the "tap 5 times" egg. The bounce on each tap is played from JS (Header.tsx). */
+.header__brand {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.celebration {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* Dim the page so the box and photo stand out */
+.celebration::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgb(8 12 30 / 60%);
+  animation: dim 5.5s ease forwards;
+}
+
+@keyframes dim {
+  0% {
+    opacity: 0;
+  }
+
+  8%,
+  85% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.celebration__piece {
+  position: absolute;
+  top: -20px;
+  animation-name: confetti-fall;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+@keyframes confetti-fall {
+  to {
+    transform: translate(var(--drift), 110vh) rotate(720deg);
+  }
+}
+
+/* Gift box: pops in, shakes, the lid flies off and the photo jumps out */
+.giftbox {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  width: 180px;
+  height: 168px;
+  margin-left: -90px;
+  animation:
+    box-pop 0.45s cubic-bezier(0.3, 1.6, 0.5, 1) both,
+    box-fade 0.8s ease 4.6s forwards;
+}
+
+.giftbox__box {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  animation: box-shake 0.8s ease-in-out 0.45s;
+}
+
+.giftbox__body {
+  position: absolute;
+  inset: 42px 0 0;
+  border-radius: 9px;
+  background: repeating-linear-gradient(45deg, var(--red) 0 18px, var(--paper) 18px 36px);
+  box-shadow: 0 24px 45px rgb(0 0 0 / 40%);
+}
+
+/* Vertical ribbon */
+.giftbox__body::before {
+  content: '';
+  position: absolute;
+  inset: 0 75px;
+  background: var(--gold);
+}
+
+.giftbox__lid {
+  position: absolute;
+  top: 9px;
+  left: -9px;
+  right: -9px;
+  height: 39px;
+  border-radius: 9px;
+  background: var(--red);
+  box-shadow: 0 6px 0 rgb(0 0 0 / 15%);
+  animation: lid-off 0.5s ease-in 1.25s forwards;
+}
+
+.giftbox__lid::before {
+  content: '';
+  position: absolute;
+  inset: 0 84px;
+  background: var(--gold);
+}
+
+/* Bow: two loops on top of the lid */
+.giftbox__lid::after {
+  content: '';
+  position: absolute;
+  top: -27px;
+  left: 50%;
+  width: 33px;
+  height: 27px;
+  margin-left: -16.5px;
+  border-radius: 50% 50% 0 0;
+  background: var(--gold);
+  box-shadow:
+    -24px 9px 0 -4.5px var(--gold),
+    24px 9px 0 -4.5px var(--gold);
+}
+
+.giftbox__glow {
+  position: absolute;
+  bottom: 90px;
+  left: 50%;
+  width: 420px;
+  height: 420px;
+  margin-left: -210px;
+  border-radius: 50%;
+  background: radial-gradient(circle, oklch(0.85 0.13 85 / 55%), transparent 65%);
+  opacity: 0;
+  animation: glow-burst 1.2s ease-out 1.25s forwards;
+}
+
+.giftbox__photo {
+  position: absolute;
+  bottom: 150px;
+  left: 50%;
+  display: grid;
+  place-items: center;
+  width: 252px;
+  height: 315px;
+  overflow: hidden;
+  border: 9px solid var(--gold);
+  border-radius: 36px;
+  background: var(--paper);
+  box-shadow:
+    0 0 0 6px var(--night),
+    0 27px 60px rgb(0 0 0 / 45%);
+  opacity: 0;
+  transform: translate(-50%, 90px) scale(0.3);
+  animation: photo-rise 0.7s cubic-bezier(0.3, 1.4, 0.5, 1) 1.25s forwards;
+}
+
+.giftbox__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Zoom in on the face: it sits at ~48% / 37% of this photo */
+  object-position: 50% 30%;
+  transform: scale(1.7);
+  transform-origin: 48% 37%;
+}
+
+.giftbox__placeholder {
+  font-size: 108px;
+}
+
+@keyframes box-pop {
+  from {
+    transform: scale(0);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes box-shake {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+
+  15% {
+    transform: rotate(-8deg);
+  }
+
+  30% {
+    transform: rotate(7deg);
+  }
+
+  45% {
+    transform: rotate(-6deg);
+  }
+
+  60% {
+    transform: rotate(5deg);
+  }
+
+  75% {
+    transform: rotate(-3deg);
+  }
+}
+
+@keyframes lid-off {
+  to {
+    transform: translate(75px, -255px) rotate(35deg);
+    opacity: 0;
+  }
+}
+
+@keyframes glow-burst {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+
+  40% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+}
+
+@keyframes photo-rise {
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1);
+  }
+}
+
+@keyframes box-fade {
+  to {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+}
+
+/* Snowman: built ball by ball by tapping the snowdrift */
+.snowdrift {
+  position: relative;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.snowman {
+  position: absolute;
+  right: 18%;
+  /* sits on the curve of the drift, slightly sunk into the snow */
+  bottom: calc(100% - 20px);
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  pointer-events: none;
+}
+
+.snowman__ball {
+  position: relative;
+  display: block;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fff 0 40%, #dfe7f3 100%);
+  box-shadow: inset -3px -4px 0 rgb(40 60 100 / 8%);
+  animation: snow-pop 0.45s cubic-bezier(0.3, 1.6, 0.5, 1) both;
+}
+
+.snowman__ball--base {
+  width: 48px;
+  height: 48px;
+}
+
+.snowman__ball--middle {
+  width: 36px;
+  height: 36px;
+  margin-bottom: -9px;
+}
+
+.snowman__ball--head {
+  width: 27px;
+  height: 27px;
+  margin-bottom: -7px;
+}
+
+@keyframes snow-pop {
+  from {
+    transform: scale(0);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+.snowman__eye {
+  position: absolute;
+  top: 36%;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--ink);
+}
+
+.snowman__eye--left {
+  left: 28%;
+}
+
+.snowman__eye--right {
+  right: 28%;
+}
+
+/* Carrot nose: a CSS triangle pointing right */
+.snowman__nose {
+  position: absolute;
+  top: 52%;
+  left: 48%;
+  border-top: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+  border-left: 11px solid #f08a24;
+}
+
+.snowman__scarf {
+  position: absolute;
+  top: -2px;
+  left: 12%;
+  width: 76%;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--red);
+}
+
+.snowman__arm {
+  position: absolute;
+  top: 35%;
+  width: 24px;
+  height: 3px;
+  border-radius: 2px;
+  background: #6b4a2b;
+}
+
+.snowman__arm--left {
+  right: 100%;
+  transform: rotate(25deg);
+  transform-origin: right center;
+}
+
+.snowman__arm--right {
+  left: 100%;
+  transform: rotate(-25deg);
+  transform-origin: left center;
+  animation: snow-wave 0.5s ease-in-out 0.45s 3;
+}
+
+@keyframes snow-wave {
+  50% {
+    transform: rotate(-60deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .celebration__piece {
+    display: none;
+  }
+
+  .giftbox,
+  .giftbox__box,
+  .giftbox__glow {
+    animation: none;
+  }
+
+  .giftbox__lid {
+    display: none;
+  }
+
+  .giftbox__photo {
+    opacity: 1;
+    transform: translate(-50%, 0);
+    animation: none;
+  }
+
+  .snowman__ball,
+  .snowman__arm--right {
+    animation: none;
+  }
+}
+
 /* ---------- Mobile ---------- */
 
 @media (max-width: 600px) {
