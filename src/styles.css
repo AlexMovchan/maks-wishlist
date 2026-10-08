@@ -199,7 +199,7 @@ code {
 }
 
 .header__inner {
-  max-width: 760px;
+  max-width: 1280px;
   margin: 0 auto;
   padding: 10px 16px;
   display: flex;
@@ -262,7 +262,7 @@ code {
   position: relative;
   flex: 1;
   width: 100%;
-  max-width: 760px;
+  max-width: 1280px;
   margin: 0 auto;
   padding: 24px 16px 0;
 }
@@ -328,10 +328,16 @@ code {
 
 /* ---------- Gift cards ---------- */
 
+/* Flex instead of grid so an incomplete last row stays centred */
 .grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 22px;
+}
+
+.grid > .card {
+  flex: 0 0 280px;
 }
 
 .card {
@@ -790,7 +796,10 @@ textarea:focus {
 /* ---------- Mobile ---------- */
 
 @media (max-width: 600px) {
+  /* Phones: a strict two-column grid, so a lone last card sits in the left column */
   .grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 12px;
   }
 
