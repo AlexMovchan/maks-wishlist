@@ -1,13 +1,6 @@
 import { formatPrice, safeUrl } from '../../lib/format';
+import { getGiftStatus, type GiftStatus as Status } from '../../lib/giftStatus';
 import type { Gift } from '../../types';
-
-type Status = 'free' | 'mine' | 'taken';
-
-const getStatus = (gift: Gift): Status => {
-  if (gift.is_mine) return 'mine';
-  if (gift.is_reserved) return 'taken';
-  return 'free';
-};
 
 type Props = {
   gift: Gift;
@@ -18,7 +11,7 @@ type Props = {
 };
 
 export const GiftCard = ({ gift, isAdmin, busy, onReserve, onUnreserve }: Props) => {
-  const status = getStatus(gift);
+  const status = getGiftStatus(gift);
 
   return (
     <article className={`card card--${status}`}>

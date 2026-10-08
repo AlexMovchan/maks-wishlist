@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { api } from '../../api';
 import type { Notify } from '../../hooks/useToast';
 import { errorText } from '../../lib/errors';
+import { sortForGuests } from '../../lib/giftStatus';
 import type { Gift, Me } from '../../types';
 import { GiftCard } from './GiftCard';
 
@@ -32,6 +33,7 @@ export const GiftGrid = ({ gifts, me, reload, notify, onLogin }: Props) => {
 
   const reserve = (gift: Gift) => {
     if (!me) return onLogin();
+
     run(gift, 'reserve', `«${gift.title}» заброньовано за вами 🎉`);
   };
 
@@ -39,12 +41,13 @@ export const GiftGrid = ({ gifts, me, reload, notify, onLogin }: Props) => {
     const question = gift.is_mine
       ? `Скасувати бронювання «${gift.title}»?`
       : `Зняти бронювання «${gift.title}» (${gift.reserved_by})?`;
+
     if (confirm(question)) run(gift, 'unreserve', 'Бронювання скасовано');
   };
 
   return (
     <div className="grid">
-      {gifts.map((gift) => (
+      {sortForGuests(gifts).map((gift) => (
         <GiftCard
           key={gift.id}
           gift={gift}
